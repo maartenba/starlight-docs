@@ -10,9 +10,9 @@ export default defineConfig({
 		starlight({
 			plugins: [
 				starlightLinksValidator(),
-				starlightVersions({
+				/*starlightVersions({
 					versions: [{ slug: '1.0' }],
-				}),
+				}),*/
 			],
 			title: 'My Docs',
 			social: {
