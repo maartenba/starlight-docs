@@ -3,7 +3,67 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 import starlightVersions from 'starlight-versions';
-import starlightClientMermaid from '@pasqal-io/starlight-client-mermaid'
+import starlightClientMermaid from '@pasqal-io/starlight-client-mermaid';
+import {readdir, readFile} from "fs/promises";
+import matter from "gray-matter";
+
+// TODO: will need rewriting to make the structure of the sidebar look nice
+async function autogenSections() {
+	const sections = (
+		await readdir("./src/content/docs/", {
+			withFileTypes: true,
+		})
+	)
+		.filter((path) => path.isDirectory())
+		.flatMap(async (path) => {
+			const subdirectoryPath = `./src/content/docs/${path.name}/`;
+			const subdirectories = (
+				await readdir(subdirectoryPath, {withFileTypes: true})
+			)
+				.filter((subPath) => subPath.isDirectory())
+				.map(async (subPath) => {
+					const indexPath = `${subdirectoryPath}${subPath.name}/index.md`;
+					let starlightOrder = Infinity;
+					let label = `${path.name}/${subPath.name}`;
+
+					try {
+						const fileContent = await readFile(indexPath, "utf-8");
+						const frontmatter = matter(fileContent).data;
+
+						if (frontmatter && frontmatter["starlight"] && frontmatter["starlight"]["order"]) {
+							starlightOrder = frontmatter["starlight"]["order"];
+						}
+
+						if (frontmatter && frontmatter["title"]) {
+							label = frontmatter["title"];
+						}
+					} catch (err) {
+						console.warn(`Could not read or parse frontmatter from ${indexPath}:`, err);
+					}
+
+					return {
+						label: label,
+						order: starlightOrder,
+						autogenerate: {
+							directory: `${path.name}/${subPath.name}`,
+							collapsed: true,
+						},
+					};
+				});
+
+			// Return all subdirectories mapped to promises
+			return Promise.all(subdirectories);
+		});
+
+	// Resolve all nested promises and flatten the result
+	const resolvedSections = (await Promise.all(sections)).flat();
+
+	return resolvedSections
+		.sort((a, b) => a.order - b.order)
+		.map(({order, ...data}) => data);
+}
+
+const sidebar = await autogenSections();
 
 // https://astro.build/config
 export default defineConfig({
@@ -29,31 +89,7 @@ export default defineConfig({
 				linkedin: 'https://www.linkedin.com/company/duendesoftware/',
 				'x.com': 'https://x.com/DuendeIdentity',
 			},
-			sidebar: [
-				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
-				},
-				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
-				},
-				{
-					label: 'IdentityServer',
-					autogenerate: { directory: 'identityserver' },
-				},
-				{
-					label: 'Backend-for-Frontend',
-					autogenerate: { directory: 'bff' },
-				},
-				{
-					label: 'Open-source',
-					autogenerate: { directory: 'foss' },
-				},
-			],
+			sidebar: sidebar,
 		}),
 	],
 });
