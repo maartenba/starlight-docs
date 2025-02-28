@@ -7,7 +7,6 @@ import starlightClientMermaid from '@pasqal-io/starlight-client-mermaid';
 import {readdir, readFile} from "fs/promises";
 import matter from "gray-matter";
 
-// TODO: will need rewriting to make the structure of the sidebar look nice
 async function autogenSections() {
 	const sections = (
 		await readdir("./src/content/docs/", {
@@ -89,7 +88,20 @@ export default defineConfig({
 				linkedin: 'https://www.linkedin.com/company/duendesoftware/',
 				'x.com': 'https://x.com/DuendeIdentity',
 			},
-			sidebar: sidebar,
+			sidebar: [
+				{
+					label: 'IdentityServer',
+					autogenerate: { directory: 'identityserver' },
+				},
+				{
+					label: 'Backend-for-Frontend',
+					autogenerate: { directory: 'bff' },
+				},
+				{
+					label: 'Open-source',
+					autogenerate: { directory: 'foss' },
+				},
+			],
 		}),
 	],
 });
