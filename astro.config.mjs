@@ -66,20 +66,29 @@ const sidebar = await autogenSections();
 
 // https://astro.build/config
 export default defineConfig({
+	trailingSlash: 'always',
 	integrations: [
 		starlight({
 			plugins: [
 				starlightClientMermaid({ /* options */ }),
-				starlightLinksValidator(),
+				starlightLinksValidator({
+					errorOnFallbackPages: false,
+					errorOnInconsistentLocale: true,
+				}),
 				/*starlightVersions({
-					versions: [{ slug: '1.0' }],
+					versions: [
+					{
+					  label: 'v9'
+					}],
 				}),*/
 			],
 			title: 'Duende Software Docs',
 			logo: {
-				src: './src/assets/duende-logo.png',
+				light: './src/assets/duende-logo.png',
+				dark: './src/assets/duende-logo-dark.png',
 				replacesTitle: true,
 			},
+			lastUpdated: true,
 			editLink: {
 				baseUrl: 'https://github.com/DuendeSoftware/docs.duendesoftware.com/edit/main/docs/',
 			},
