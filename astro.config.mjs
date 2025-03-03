@@ -85,6 +85,7 @@ export default defineConfig({
 			},
 			social: {
 				github: 'https://github.com/DuendeSoftware',
+				blueSky: 'https://bsky.app/profile/duendesoftware.com',
 				linkedin: 'https://www.linkedin.com/company/duendesoftware/',
 				'x.com': 'https://x.com/DuendeIdentity',
 			},
