@@ -91,15 +91,37 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'IdentityServer',
-					autogenerate: { directory: 'identityserver' },
+					items: [
+						{
+							label: 'v7',
+							autogenerate: { directory: 'identityserver/v7' },
+						},
+						{
+							label: 'v6',
+							autogenerate: { directory: 'identityserver/v6' },
+							collapsed: true
+						},
+						{
+							label: 'v5',
+							autogenerate: { directory: 'identityserver/v5' },
+							collapsed: true
+						},
+					]
 				},
 				{
-					label: 'Backend-for-Frontend',
-					autogenerate: { directory: 'bff' },
+					label: 'Backend-for-Frontend (BFF)',
+					items: [
+						{
+							label: 'v2',
+							autogenerate: { directory: 'bff/v2' },
+							collapsed: true
+						},
+					]
 				},
 				{
 					label: 'Open-source',
 					autogenerate: { directory: 'foss' },
+					collapsed: true
 				},
 			],
 		}),
