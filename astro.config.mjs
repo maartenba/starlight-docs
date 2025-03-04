@@ -122,6 +122,11 @@ export default defineConfig({
 					label: 'Backend-for-Frontend (BFF)',
 					items: [
 						{
+							label: 'v3',
+							autogenerate: { directory: 'bff/v3' },
+							collapsed: true
+						},
+						{
 							label: 'v2',
 							autogenerate: { directory: 'bff/v2' },
 							collapsed: true
