@@ -66,7 +66,7 @@ const sidebar = await autogenSections();
 
 // https://astro.build/config
 export default defineConfig({
-	trailingSlash: 'always',
+	trailingSlash: 'ignore',
 	integrations: [
 		starlight({
 			plugins: [
@@ -97,6 +97,9 @@ export default defineConfig({
 				blueSky: 'https://bsky.app/profile/duendesoftware.com',
 				linkedin: 'https://www.linkedin.com/company/duendesoftware/',
 				'x.com': 'https://x.com/DuendeIdentity',
+			},
+			components: {
+				Footer: './src/overrides/Footer.astro'
 			},
 			sidebar: [
 				{
