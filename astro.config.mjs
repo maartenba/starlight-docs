@@ -7,6 +7,10 @@ import starlightClientMermaid from '@pasqal-io/starlight-client-mermaid';
 // https://astro.build/config
 export default defineConfig({
 	trailingSlash: 'ignore',
+	redirects: {
+		"/some-page": "/identityserver/v7/",
+		"/some-other-page": "https://duendesoftware.com"
+	},
 	integrations: [
 		starlight({
 			plugins: [
