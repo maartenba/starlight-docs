@@ -33,52 +33,132 @@ export default defineConfig({
 			social: {
 				github: 'https://github.com/DuendeSoftware',
 				blueSky: 'https://bsky.app/profile/duendesoftware.com',
-				linkedin: 'https://www.linkedin.com/company/duendesoftware/',
-				'x.com': 'https://x.com/DuendeIdentity',
+				linkedin: 'https://www.linkedin.com/company/duendesoftware/'
 			},
 			components: {
 				Footer: './src/overrides/Footer.astro'
 			},
 			sidebar: [
-				{
-					label: 'IdentityServer',
-					items: [
-						{
-							label: 'v7',
-							autogenerate: { directory: 'identityserver/v7' },
-						},
-						{
-							label: 'v6',
-							autogenerate: { directory: 'identityserver/v6' },
-							collapsed: true
-						},
-						{
-							label: 'v5',
-							autogenerate: { directory: 'identityserver/v5' },
-							collapsed: true
-						},
-					]
-				},
-				{
-					label: 'Backend-for-Frontend (BFF)',
-					items: [
-						{
-							label: 'v3',
-							autogenerate: { directory: 'bff/v3' },
-							collapsed: true
-						},
-						{
-							label: 'v2',
-							autogenerate: { directory: 'bff/v2' },
-							collapsed: true
-						},
-					]
-				},
-				{
-					label: 'Open-source',
-					autogenerate: { directory: 'foss' },
-					collapsed: true
-				},
+					{
+						label: 'General information',
+						items: [
+							{ label: 'Licensing', link: 'https://www.nasa.gov/' },
+							{ label: 'Support and Issues', link: 'https://www.nasa.gov/' },
+							{ label: 'Security best-practices', link: 'https://www.nasa.gov/' },
+							{ label: 'Glossary', link: 'https://www.nasa.gov/' },
+						]
+					},
+					{
+						label: 'IdentityServer',
+						items: [
+							{
+								label: 'Getting Started',
+								items: [
+									{label: 'Licensing', link: 'https://www.nasa.gov/'},
+									{label: 'Support and Issues', link: 'https://www.nasa.gov/'},
+									{label: 'Security best-practices', link: 'https://www.nasa.gov/'},
+									{label: 'Glossary', link: 'https://www.nasa.gov/'},
+								],
+								collapsed: true,
+							},
+							{
+								label: '...',
+								autogenerate: {directory: 'identityserver/v7'},
+								collapsed: true,
+							},
+							{
+								label: 'Release notes',
+								items: [
+									{label: '7.1', link: 'https://www.nasa.gov/'},
+									{label: '7.0', link: 'https://www.nasa.gov/'},
+								]
+							},
+							{
+								label: 'Migration',
+								autogenerate: {directory: 'identityserver/v7/upgrades'},
+								collapsed: true,
+							},
+							{
+								label: 'API reference',
+								items: [
+									{label: '7.1', link: 'https://www.nasa.gov/'},
+									{label: '7.0', link: 'https://www.nasa.gov/'},
+								],
+								collapsed: true,
+							},
+						]
+					},
+					{
+						label: 'Backend-for-Frontend (BFF)',
+						items: [
+							{
+								label: 'Getting Started',
+								items: [
+									{label: 'Licensing', link: 'https://www.nasa.gov/'},
+									{label: 'Support and Issues', link: 'https://www.nasa.gov/'},
+									{label: 'Security best-practices', link: 'https://www.nasa.gov/'},
+									{label: 'Glossary', link: 'https://www.nasa.gov/'},
+								],
+								collapsed: true,
+							},
+							{
+								label: '...',
+								autogenerate: {directory: 'identityserver/bff'},
+								collapsed: true,
+							},
+							{
+								label: 'Release notes',
+								items: [
+									{label: '3.0', link: 'https://www.nasa.gov/'},
+									{label: '2.0', link: 'https://www.nasa.gov/'},
+								]
+							},
+							{
+								label: 'Migration',
+								autogenerate: {directory: 'identityserver/v7/upgrades'},
+								collapsed: true,
+							},
+							{
+								label: 'API reference',
+								items: [
+									{label: '3.0', link: 'https://www.nasa.gov/'},
+								],
+								collapsed: true,
+							},
+						]
+					},
+					{
+						label: 'Token Management',
+						badge: 'oss',
+						items: [
+							{
+								label: 'Getting Started',
+								items: [
+									{label: 'Licensing', link: 'https://www.nasa.gov/'},
+									{label: 'Support and Issues', link: 'https://www.nasa.gov/'},
+									{label: 'Security best-practices', link: 'https://www.nasa.gov/'},
+									{label: 'Glossary', link: 'https://www.nasa.gov/'},
+								],
+								collapsed: true,
+							}
+						]
+					},
+					{
+						label: 'IdentityModel',
+						badge: 'oss',
+						items: [
+							{
+								label: 'Getting Started',
+								items: [
+									{label: 'Licensing', link: 'https://www.nasa.gov/'},
+									{label: 'Support and Issues', link: 'https://www.nasa.gov/'},
+									{label: 'Security best-practices', link: 'https://www.nasa.gov/'},
+									{label: 'Glossary', link: 'https://www.nasa.gov/'},
+								],
+								collapsed: true,
+							}
+						]
+					},
 			],
 		}),
 	],
